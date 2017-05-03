@@ -3,17 +3,23 @@
 //master demensions
 masterWidth = 1200;
 masterHeight = 800;
+pieces = [];
 
 
 function setup(){
   createCanvas(masterWidth,masterHeight);
   chessBoard = new board();
+  //make pieces
+  pieces.push(new King(0));
+  pieces.push(new King(1));
+  pieces.push(new Queen(0));
+  pieces.push(new Queen(1));
 }
 
 function draw(){
-  background(0);
+  background(40);
 
-  //chessBoard.show();
+  chessBoard.show();
 }
 
 
@@ -28,21 +34,30 @@ board = function(){
 
   this.size = 600;
   this.gridSize = this.size / 8;
+  this.topOffset = 100;
+  this.sideOffset = 100;
 
   //make table
-  chessTable = new p5.Table(8);
+  chessTable = new p5.Table();
   letters = ['A','B','C','D','E','F','G','H'];
+
   for(var i=0; i<letters.length; i++){
     chessTable.addColumn(letters[i]);
+    chessTable.addRow();
   }
 
 
 
   this.show = function(){
     //draw the table
+    for(var i=0;i<chessTable.getColumnCount();i++){
 
-    for(var i =0; i<8;i++){
-      //
+      for(var j=0;j<chessTable.getRowCount();j++){
+        noFill();
+        stroke(255);
+        rect(this.gridSize*j + this.sideOffset,this.gridSize*i+ this.topOffset,this.gridSize,this.gridSize);
+      }
     }
   }
+
 }
