@@ -1,11 +1,16 @@
 /*
+  Zachary Bishop
+  Chess Engine
 
+  This program is a basic chess Engine
+
+  There are a few things to make better such as the repeated move checking code found in each piece
 */
 var masterSize = 800;
 var letters = ['A','B','C','D','E','F','G','H'];
 var BlackOrWhiteGame = 0;
 var pieceIsSelected = false;
-var pieceIsMoved = false;
+var pieceWasJustSelected = false;
 var columnIndex = 0;
 var rowIndex;
 var selectedPiece;
@@ -61,7 +66,7 @@ function setup(){
     chessBoard.chessData.set(7,"B",new Knight(0));
     chessBoard.chessData.set(7,"G",new Knight(0));
 
-    chessBoard.chessData.set(5,"A",new Rook(1));
+    chessBoard.chessData.set(0,"A",new Rook(1));
     chessBoard.chessData.set(0,"H",new Rook(1));
     chessBoard.chessData.set(7,"A",new Rook(0));
     chessBoard.chessData.set(7,"H",new Rook(0));
@@ -84,11 +89,9 @@ function checkIfSelected(){
 
   var scale = chessBoard.gridSize;
 
-
   if(!pieceIsSelected){
     if(mouseIsPressed && mouseY > 0 && mouseY < masterSize ){
     //check to see if they clicked a piece
-
 
       //find x and y
       columnIndex = Math.floor(mouseX / scale);
@@ -124,10 +127,6 @@ function checkIfSelected(){
       }
     }
   }
-
-
-
-
 }
 
 
@@ -161,10 +160,12 @@ board = function(){
 
     for(var i=0;i<8;i++){
       for(var j=0;j<8;j++){
-
         stroke(255);
-        fill(150);
-
+        if(i%2 == j%2){
+          fill(150);
+        }else {
+          fill(100);
+        }
         rect(this.gridSize*j + this.sideOffset,this.gridSize*i+ this.topOffset,this.gridSize,this.gridSize);
       }
     }

@@ -67,6 +67,7 @@ Pawn = function(team){
             chessBoard.movePiece(rowIndex,columnIndex,clickedRowIndex,clickedColumnIndex);
             this.hasMoved = true;
             pieceIsSelected = false;
+            pieceWasJustSelected = true;
           }
       }
     }
@@ -79,22 +80,22 @@ Pawn = function(team){
           chessBoard.movePiece(rowIndex,columnIndex,clickedRowIndex,clickedColumnIndex);
           this.hasMoved = true;
           pieceIsSelected = false;
+          pieceWasJustSelected = true;
         }
     }
   }
 
     //check to see if they clicked outside the current cell, if so, the user wants to select another piece
-    if(clickedColumnIndex == columnIndex && clickedRowIndex == rowIndex){
-    }else {
-      pieceIsSelected = false;
+      if(clickedColumnIndex == columnIndex && clickedRowIndex == rowIndex){
+      }else {
+        pieceIsSelected = false;
+      }
     }
-
   }
-
-
-}
 
 this.getTeam = function(){
   return this.team;
 }
+
+
 }
